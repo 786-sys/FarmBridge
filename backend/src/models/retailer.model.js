@@ -55,9 +55,12 @@ const RetailerSchema = mongoose.Schema({
         type: String,
         required:[true,"passord is required"]
     },
-    conversation:{
-        type:[String]
-     },
+    conversation:[
+        {
+            query:{type:String},
+            answer:{type:String}
+        }
+    ],
     refreshToken: {
         type: String
     }

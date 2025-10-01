@@ -97,5 +97,25 @@ const RetailerLogout = async (req, res) => {
     .clearCookie("refreshtoken_r",options)
     .json({message:"successfull log out"})
 }
+const RetailerConversation=asynchandler(async(req,res)=>{
+    try{
+        const retail=await retailer.findById(req.retailer?._id)
+        if(!retail){
+            return res.status(401).json({error:"unauthorized user req for conversation"})
+        }
+        const {query,answer}=req.body
+        const obj={
+            query,answer
+        }
+        let Retailconver=retail.conversation
+        const arr=[...Retailconver,obj]
+        retail.conversation=arr
+        await retail.save({ validateBeforeSave: false })
+        console.log("saved conver")
+        return res.status(200).json({message:"Saved a conversation"})
+    }catch(err){
+        console.log(err)
+    }
+})
 
-export { RetailerRegister, RetailerLogin,RetailerLogout }
+export { RetailerRegister, RetailerLogin,RetailerLogout ,RetailerConversation}

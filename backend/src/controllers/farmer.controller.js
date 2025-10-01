@@ -26,7 +26,7 @@ const FarmerRegister = asynchandler(async (req, res) => {
     //     console.log("length zero")
     //     return res.status(200).json({message:"Crop grown has atleast one value"})
     // }
-    const copyarray=cropgrown.split(',')
+    const copyarray=cropgrown.split(',').trim()
     const ispresentfarmer = await farmer.findOne({ username: `${username}` })
     if (ispresentfarmer) {
         return res.status(200).json({ message: "Already a farmer exist with this Username" })
@@ -100,5 +100,24 @@ const FarmerLogout = async (req, res) => {
     .clearCookie("refreshtoken_f",options)
     .json({message:"successfull log out"})
 }
-
-export { FarmerRegister, FarmerLogin, FarmerLogout }
+const FarmerConversation=asynchandler(async(req,res)=>{
+    try{
+        const farm=await farmer.findById(req.farmer?._id)
+        if(!farm){
+            return res.status(401).json({error:"unauthorized user req for conversation"})
+        }
+        const {query,answer}=req.body
+        const obj={
+            query,answer
+        }
+        let Farmconver=farm.conversation
+        const arr=[...Farmconver,obj]
+        farm.conversation=arr
+        await farm.save({ validateBeforeSave: false })
+        console.log("saved conver")
+        return res.status(200).json({message:"Saved a conversation"})
+    }catch(err){
+        console.log(err)
+    }
+})
+export { FarmerRegister, FarmerLogin, FarmerLogout,FarmerConversation }

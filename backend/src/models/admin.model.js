@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt"
 const adminSchema=mongoose.Schema({
     fullname: {
         type: String,
@@ -26,7 +27,7 @@ const adminSchema=mongoose.Schema({
 adminSchema.pre("save",async function(next){
     if(!this.isModified("password")) return next()
 
-    this.password=await bcrypt.hash(this.password,20)
+    this.password=await bcrypt.hash(this.password,7)
     next();
 })
 

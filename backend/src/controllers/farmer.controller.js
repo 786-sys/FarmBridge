@@ -46,6 +46,7 @@ const FarmerRegister = asynchandler(async (req, res) => {
     if (!createfarmer) {
         return res.status(102).json({ message: "new Farmer not created Yet please register again" })
     }
+    console.log(createfarmer)
     return res.status(200).json({ message: "Successfully register", Farmer: createfarmer })
     }
     catch(err){

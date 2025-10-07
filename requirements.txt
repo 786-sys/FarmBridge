@@ -1,0 +1,21 @@
+# --- Core Backend ---
+fastapi
+uvicorn
+pydantic
+python-dotenv
+
+# --- Networking & Async ---
+httpx
+grpcio
+grpcio-tools
+
+# --- AI / LLM Access ---
+openai        # works with OpenRouter endpoints
+tiktoken
+
+# --- Vector / Embeddings (for local knowledge base) ---
+faiss-cpu
+sentence-transformers
+
+# --- MongoDB (for agent memory / farmer logs) ---
+motor

@@ -1,5 +1,15 @@
-export const AdminDashboard = () => {
+export const AdminDashboard = ({ data }) => {
+  if (!data) return null
+
   return (
-    <div>AdminDashboard</div>
+    <section className="card">
+      <h2>Admin Governance Panel</h2>
+      <ul>
+        <li>Onboarded farmers: {data.operations.activeFarmers}</li>
+        <li>Onboarded retailers: {data.operations.activeRetailers}</li>
+        <li>Order fulfillment SLA: {data.operations.orderFulfillment}</li>
+        <li>Platform uptime: {data.operations.uptime}</li>
+      </ul>
+    </section>
   )
 }

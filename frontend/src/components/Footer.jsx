@@ -1,5 +1,7 @@
 export const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer className="footer-shell">
+      <p>Built for resilient agriculture supply chains • FarmBridge</p>
+    </footer>
   )
 }

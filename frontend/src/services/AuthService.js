@@ -1,9 +1,8 @@
+import { api } from './api'
+
 export const AuthService = {
   async login(role) {
-    await new Promise((resolve) => setTimeout(resolve, 200))
-    return {
-      token: `demo-token-${role}`,
-      role,
-    }
+    const response = await api.login(role)
+    return response.data
   },
 }

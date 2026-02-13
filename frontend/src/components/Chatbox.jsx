@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
 
-export const Chatbox = () => {
+export const Chatbox = ({ onAsk }) => {
   const [question, setQuestion] = useState('')
   const [history, setHistory] = useState([
     { id: 1, from: 'bot', text: 'Hi! Ask me about crops, weather risk, or market pricing.' },
   ])
+  const [loading, setLoading] = useState(false)
 
   const tips = useMemo(
     () => [
@@ -15,16 +16,28 @@ export const Chatbox = () => {
     [],
   )
 
-  const ask = () => {
-    if (!question.trim()) return
-    const userMessage = { id: Date.now(), from: 'user', text: question }
-    const botMessage = {
-      id: Date.now() + 1,
-      from: 'bot',
-      text: `Insight: track moisture + local mandi trend for "${question}" before final decision.`,
-    }
-    setHistory((prev) => [...prev, userMessage, botMessage])
+  const ask = async () => {
+    if (!question.trim() || loading) return
+
+    const query = question
+    const userMessage = { id: Date.now(), from: 'user', text: query }
+    setHistory((prev) => [...prev, userMessage])
     setQuestion('')
+    setLoading(true)
+
+    try {
+      const result = await onAsk(query)
+      const botMessage = {
+        id: Date.now() + 1,
+        from: 'bot',
+        text: result,
+      }
+      setHistory((prev) => [...prev, botMessage])
+    } catch {
+      setHistory((prev) => [...prev, { id: Date.now() + 1, from: 'bot', text: 'Service unavailable.' }])
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -50,8 +63,8 @@ export const Chatbox = () => {
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask FarmBridge AI"
         />
-        <button type="button" onClick={ask} className="primary-btn">
-          Ask
+        <button type="button" onClick={ask} className="primary-btn" disabled={loading}>
+          {loading ? 'Thinking...' : 'Ask'}
         </button>
       </div>
     </section>

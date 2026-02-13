@@ -1,42 +1,156 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+main {
+  flex: 1;
+  width: min(1100px, 92vw);
+  margin: 1.2rem auto;
+  display: grid;
+  gap: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: #052e16;
+  color: #ecfdf5;
+  position: sticky;
+  top: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.brand {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-item,
+.primary-btn,
+.secondary-btn,
+.role-grid button,
+.tip-btn {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+}
+
+.nav-item {
+  margin-inline: 0.25rem;
+  background: transparent;
+  color: #dcfce7;
+}
+
+.nav-item.active {
+  background: #14532d;
+}
+
+.primary-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.secondary-btn {
+  background: #bbf7d0;
+}
+
+.user-pill {
+  font-size: 0.9rem;
+  background: #166534;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .card {
-  padding: 2em;
+  background: white;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 6px 16px rgba(2, 6, 23, 0.08);
 }
 
-.read-the-docs {
-  color: #888;
+.hero h1 {
+  margin: 0;
+}
+
+.status.ok {
+  color: #166534;
+  font-weight: 700;
+}
+
+.status.bad {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.8rem;
+}
+
+.chip {
+  display: inline-block;
+  background: #dcfce7;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem;
+}
+
+.chatbox {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.chat-history {
+  max-height: 160px;
+  overflow: auto;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 0.7rem;
+}
+
+.chat-line.user {
+  text-align: right;
+}
+
+.tip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tip-btn {
+  background: #f1f5f9;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+.footer-shell {
+  text-align: center;
+  padding: 1rem;
+  background: #dcfce7;
 }
